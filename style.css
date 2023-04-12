@@ -1,0 +1,363 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-bg-color: #eff5fe;
+  --borderColor: #0288d147;
+  --container-width: 500px;
+}
+
+body,
+html {
+  font-family: system-ui;
+  background: var(--main-bg-color);
+  height: 100%;
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar, html::-webkit-scrollbar{
+  display: none;
+}
+
+.main,
+.drop-zone, .upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main{
+  flex-direction: row;
+  height: 100%;
+  margin: -3rem 0;
+}
+
+nav{
+  height: 5rem;
+  /* background-color: #03a9f4; */
+}
+
+.logo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img{
+  height: 10rem;
+  margin-left: 50px;
+}
+
+
+.logo .items{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0;
+  width: 12%;
+  background-color: #0051ff;
+  padding: 0.4rem;
+  border: 1px solid #0051ff;
+  border-radius: 50px 0 0 50px;
+}
+
+.logo a{
+  font-size: 20px;
+  /* border: 1px solid black; */
+  padding: 5px 20px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo a:hover{
+  color: white;
+}
+
+
+.upload-container {
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 20px 20px #0000002e;
+}
+
+.drop-zone {
+  width: var(--container-width);
+  min-height: 200px;
+  border: 2px dashed var(--borderColor);
+  margin: 30px;
+  border-radius: 10px;
+  transition: all 0.25s ease-in-out;
+}
+
+.dragged.drop-zone {
+  background: var(--main-bg-color);
+  border-color: #2196f3;
+}
+
+.icon-container {
+  width: 75px;
+  height: 100px;
+  position: relative;
+}
+
+.icon-container img {
+  width: 75px;
+  position: absolute;
+  transform-origin: bottom;
+  transition: transform 0.25s ease-in-out;
+}
+
+.icon-container .center {
+  z-index: 3;
+}
+
+.icon-container .right,
+.icon-container .left {
+  filter: grayscale(0.5);
+  transform: scale(0.9);
+}
+
+.dragged .icon-container .right {
+  transform: rotate(10deg) translateX(20px) scale(0.9);
+}
+
+.dragged .icon-container .left {
+  transform: rotate(-10deg) translateX(-20px) scale(0.9);
+}
+
+.dragged .icon-container .center {
+  transform: translateY(-5px);
+}
+
+#fileInput {
+  display: none;
+}
+
+.browseBtn {
+  color: #008cff;
+  cursor: pointer;
+}
+.browseBtn:hover{
+  color: #0051ff;
+  text-decoration: underline;
+}
+
+.progress-container {
+  width: var(--container-width);
+  height: 70px;
+  border: 2px solid var(--main-bg-color);
+  margin-bottom: 25px;
+  border-radius: 10px;
+  position: relative;
+  display: none;
+}
+
+.progress-container .bg-progress{
+  background: var(--main-bg-color);
+  width: 0%;
+  height: 100%;
+  transform-origin: left;
+  border-radius: 8px;
+  transition: width 0.25s linear;
+  position: absolute;
+}
+
+.progress-container .inner-container{
+  position: absolute;
+  z-index: 2;
+  margin: 10px 15px;
+  width: calc(100% - 30px);
+}
+
+.progress-container .percent-container{
+  font-size: 13px;
+  margin: 5px;
+  opacity: 0.8;
+}
+
+.progress-bar{
+  height: 3px;
+  width: 100%;
+  background: #03a9f4;
+  border-radius: 2px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.25s linear;
+}
+
+.sharing-container{
+  width: var(--container-width);
+  margin-bottom: 20px;
+  display: none;
+}
+
+p{
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+.sharing-container .input-container{
+  position: relative;
+}
+
+.sharing-container .input-container input{
+  width: 100%;
+  border: 2px dashed var(--borderColor);
+  border-radius: 3px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-size: 15px;
+  background: #f5fcff;
+  color: #0000008c;
+  margin-bottom: 15px;
+}
+
+.input-container img{
+  position: absolute;
+  height: 22px;
+  width: 30px;
+  right: 7px;
+  top: 9px;
+  background: #f7fdff;
+  cursor: pointer;
+}
+
+.email-container{
+  display: flex;
+  align-items: center;
+}
+
+.email-container form{
+  width: 100%;
+  border: 2px solid var(--borderColor);
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.email-container .field{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 400px;
+}
+
+.email-container label {
+  font-size: 18px;
+}
+
+.email-container input{
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid var(--borderColor);
+  text-align: center;
+}
+.email-container input:focus{
+  outline: none;
+}
+
+.email-container button{
+  font-size: 18px;
+  padding: 8px 40px;
+  margin-top: 15px;
+  background: var(--main-bg-color);
+  border: 1px solid #cadaf1;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #607d8b;
+}
+.email-container button:hover{
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.toast{
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 60px);
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: black;
+  color: #fff;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+  transition: transfrom ease-in-out 0.2s;
+  z-index: 5;
+}
+
+.upload-vector{
+  background: url('./assets/illustration.svg') no-repeat center;
+  background-size: contain;
+  height: 50vh;
+  width: 50vw;
+}
+
+
+.footer{
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  background-color: #08b0fe;
+  bottom: 0px;
+  padding: 1rem;
+  /* border: 1px solid black; */
+  transition: all 0.3s ease-in-out;
+}
+
+
+.footer p{
+  text-align: center;
+  font-size: 15px;
+  color: black;
+  font-weight: 500;
+}
+
+.footer p::selection{
+  background-color: yellow;
+}
+
+@media screen and (max-width: 900px){
+  :root{
+    --container-width: 320px;
+  }
+  .upload-vector{
+    display: none;
+  }
+  .email-container .field{
+    flex-direction: column;
+    width: 300px;
+  }
+  .email-container input{
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width: 352px){
+  .logo .items{
+    width: 40%;
+    background-color: #0051ff;
+    padding: 0.3rem;
+    border: 1px solid #0051ff;
+    border-radius: 50px 0 0 50px;
+  }
+  .logo a{
+    font-size: 15px;
+    padding: 3px 10px;
+  }
+  .footer p{
+    font-size: 12px;
+  }
+}
